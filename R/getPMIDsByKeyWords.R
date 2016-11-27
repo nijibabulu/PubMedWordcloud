@@ -18,7 +18,7 @@
 #' 
 #' # getPMIDsByKeyWords(journal="science",dFrom=2012,dTo=2013)
 getPMIDsByKeyWords <-function(keys=NULL,journal=NULL,dFrom=NULL, dTo=NULL, n=10000){
-  eSearch <- "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=" 
+  eSearch <- "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=" 
   
   if(is.null(keys) && is.null(journal)){
     stop("at most one of 'keys' and 'journal' can be NULL!")
@@ -63,7 +63,7 @@ getPMIDsByKeyWords <-function(keys=NULL,journal=NULL,dFrom=NULL, dTo=NULL, n=100
   
   searchUrl <- paste(eSearch, hlpQ4, sep = "" )
   
-  hlpURL <- getURL(searchUrl)
+  hlpURL <- getURL(searchUrl,.opts=curlOptions(followlocation=TRUE))
   
   doc <- xmlTreeParse(hlpURL, asText = TRUE)     
   IdlistHlp = xmlValue(doc[["doc"]][["eSearchResult"]][["IdList"]])

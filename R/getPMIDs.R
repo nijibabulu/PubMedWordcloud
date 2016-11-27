@@ -12,7 +12,7 @@
 #' 
 #' # getPMIDs(author="Yanhui Fan",dFrom=2007,dTo=2013,n=10)
 getPMIDs <-function(author,dFrom, dTo, n=50){
-  eSearch <- "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=" 
+  eSearch <- "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=" 
   aL <- str_replace_all(author, " ", "+")
   aQ <- paste(aL, "[author]", sep = "")
   
@@ -35,7 +35,7 @@ getPMIDs <-function(author,dFrom, dTo, n=50){
   hlpQ2 <- paste(hlpQ1, rmQ, sep="")
   
   searchUrl <- paste(eSearch, hlpQ2, sep = "" )
-  hlpURL <- getURL(searchUrl)
+  hlpURL <- getURL(searchUrl,.opts=curlOptions(followlocation=TRUE))
   
   doc <- xmlTreeParse(hlpURL, asText = TRUE)     
   IdlistHlp = xmlValue(doc[["doc"]][["eSearchResult"]][["IdList"]])

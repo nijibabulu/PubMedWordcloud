@@ -15,7 +15,7 @@
 getAbstracts <-function(pmid){
   if(length(pmid)>0){
   #Data record download - basic URL
-  eDDownload <- "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id="
+  eDDownload <- "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id="
   hlp1 <- paste(eDDownload, paste(pmid, collapse = ",", sep = ""), sep = "")
   hlp2 <- paste(hlp1, "&rettype=abstract", sep = "")
   testDoc <- xmlTreeParse(hlp2, useInternalNodes = TRUE)
