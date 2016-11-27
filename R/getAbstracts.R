@@ -18,7 +18,7 @@ getAbstracts <-function(pmid){
   eDDownload <- "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id="
   hlp1 <- paste(eDDownload, paste(pmid, collapse = ",", sep = ""), sep = "")
   hlp2 <- paste(hlp1, "&rettype=abstract", sep = "")
-  hlpURL <- getURL(searchUrl,.opts=curlOptions(followlocation=TRUE))
+  hlpURL <- getURL(hlp2,.opts=curlOptions(followlocation=TRUE))
   testDoc <- xmlTreeParse(hlpURL, useInternalNodes = TRUE)
   topFetch <-xmlRoot(testDoc)
   abst <- xpathSApply(topFetch, "//Abstract", xmlValue)
